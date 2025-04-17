@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Entities.Content;
@@ -6,16 +8,16 @@ using Unity.Mathematics;
 using Unity.Scenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 namespace Streaming.AssetManagement
 {
 #if !UNITY_DISABLE_MANAGED_COMPONENTS
-    public partial struct AssetLoadingSystem : ISystem
+    public partial struct TestSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
         {
+            //Debug.Log("TestSystem");
             var noLoadingQuery = SystemAPI.QueryBuilder().WithAll<References>()
-                .WithNone<Loading, RequestUnload>().Build();
+                            .WithNone<Loading, RequestUnload>().Build();
 
             // This uncommented line would add the Loading components, but they would all be null:
             //      state.EntityManager.AddComponent<Loading>(noLoadingQuery);
@@ -67,7 +69,8 @@ namespace Streaming.AssetManagement
                 {
                     loading.GameObjectScene = refs.GameObjectSceneReference.LoadAsync(new ContentSceneParameters
                     {
-                        autoIntegrate = true, loadSceneMode = LoadSceneMode.Additive,
+                        autoIntegrate = true,
+                        loadSceneMode = LoadSceneMode.Additive,
                         localPhysicsMode = LocalPhysicsMode.None
                     });
                 }
@@ -205,5 +208,6 @@ namespace Streaming.AssetManagement
             return obj;
         }
     }
+
 #endif
 }
