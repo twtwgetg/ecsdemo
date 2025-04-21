@@ -18,7 +18,7 @@ public partial struct moveSystem : ISystem
         {
              var transform = SystemAPI.ManagedAPI.GetComponent<Transform>(entity);
 
-             transform.localPosition+=new Vector3(0,0,0.01f);
+             //transform.localPosition+=new Vector3(0,0,0.01f);
         }
     }
 }

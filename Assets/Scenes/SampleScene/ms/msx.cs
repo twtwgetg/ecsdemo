@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Entities;
+using UnityEngine;
+
+public class msx : MonoBehaviour
+{
+    public Mesh mesh;
+    public Material material;
+    class Baker:Baker<msx>
+    {
+        public override void Bake(msx authoring)
+        {
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddComponentObject(entity, new msxExp
+            {
+                mesh = authoring.mesh,
+                mat = authoring.material,
+                pos = authoring.transform.position,
+                rot = authoring.transform.rotation,
+                sca = authoring.transform.localScale
+            });
+        }
+    }
+}
+public class msxExp:IComponentData
+{
+    public Mesh mesh;
+    public Material mat;
+    public Vector3 pos, sca;
+    public Quaternion rot;
+}

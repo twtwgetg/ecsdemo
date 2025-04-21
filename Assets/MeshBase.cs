@@ -15,6 +15,8 @@ public class MeshBase : MonoBehaviour
             AddComponentObject(entity, new PrefabCWrapper
             {
                 xprefab = authoring.prefab
+                ,pos = authoring.transform.position
+
             });
         }
     }
@@ -26,5 +28,6 @@ public class MeshBase : MonoBehaviour
 public class PrefabCWrapper:IComponentData
 {
     public GameObject xprefab;
+    public Vector3 pos;
 }
 #endif
