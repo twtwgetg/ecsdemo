@@ -167,8 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 059f0357fb2d92342b67c1b2656022e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 4300000, guid: c974c095620012f40b267c3b77ada8ea, type: 2}
-  material: {fileID: 2100000, guid: b23ee33d9cae04150bec4a920da1f063, type: 2}
+  zs: {fileID: 7329488593519219465, guid: ca596b1add755164a88e0c2a0f782cad, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
