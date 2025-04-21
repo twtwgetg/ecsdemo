@@ -30,4 +30,5 @@ public class msxExp:IComponentData
     public Material mat;
     public Vector3 pos, sca;
     public Quaternion rot;
+    public float time;
 }

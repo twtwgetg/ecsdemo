@@ -31,7 +31,7 @@ public class TAction
         {
             LodMesh acd = new LodMesh();
 
-            var hpath = string.Format("Assets/BakedMeshes/Warrior_Attack_{0}.asset", i);
+            var hpath = string.Format("Assets/BakedMeshes/Warrior_{0}_{1}.asset",name,i);
             acd.hight = UnityEditor.AssetDatabase.LoadAssetAtPath<Mesh>(hpath);
 
             var dirpath = string.Format("Warrior_{0}_{1}", name, i);
@@ -52,7 +52,7 @@ public class TAction
      */
     internal Mesh getMeshByTime(float time)
     {
-        int framecount =(int)( time * 60);
+        int framecount =Mathf.FloorToInt(time * 60);
         framecount %= data.ml.Length;
         return data.ml[framecount].hight;
     }

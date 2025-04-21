@@ -37,6 +37,7 @@ public partial struct createsystem : ISystem
                     rot = Quaternion.identity, // 默认旋转  
                     sca = Vector3.one, // 默认缩放  
                     zs = gb.GetComponent<zhanshi>(),
+                    time = Random.Range(0, 2f),
                     mesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx"), // 使用内置立方体网格  
                     mat = new Material(Shader.Find("Standard")) // 使用标准材质  
                 };
@@ -57,12 +58,12 @@ public partial struct createsystem : ISystem
         {
             // 获取 msxExp 组件  
             var dt = SystemAPI.ManagedAPI.GetComponent<msxExp>(entity);
-
+            dt.time += Time.deltaTime;
             // 创建变换矩阵  
             Matrix4x4 matrix4X4 = Matrix4x4.TRS(dt.pos, dt.rot, dt.sca);
-
+            
             // 绘制网格  
-            Graphics.DrawMesh(dt.zs.getMesh("Idle",0), matrix4X4, dt.mat, 0);
+            Graphics.DrawMesh(dt.zs.getMesh("Idle",dt.time), matrix4X4, dt.mat, 0);
         }
     }
 }
