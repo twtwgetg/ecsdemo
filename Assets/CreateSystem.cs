@@ -51,8 +51,8 @@ public partial struct createsystem : ISystem
         // 查询所有拥有 msxExp 组件的实体  
         noLoadingQuery = SystemAPI.QueryBuilder()
             .WithAll<msxExp>() // 必须拥有 msxExp 组件     
-            .Build();
-
+            .Build(); 
+        Dictionary<Mesh ,List<Matrix4x4>> dic = new Dictionary<Mesh, List<Matrix4x4>>();
         // 遍历查询到的实体并绘制网格  
         foreach (var entity in noLoadingQuery.ToEntityArray(Allocator.Temp))
         {
@@ -61,9 +61,33 @@ public partial struct createsystem : ISystem
             dt.time += Time.deltaTime;
             // 创建变换矩阵  
             Matrix4x4 matrix4X4 = Matrix4x4.TRS(dt.pos, dt.rot, dt.sca);
-            
+            var m = dt.zs.getMesh("Idle", dt.time);
+            if (!dic.ContainsKey(m))
+            {
+                dic[m] = new List<Matrix4x4>();
+            }
+            dic[m].Add(matrix4X4);
+
             // 绘制网格  
-            Graphics.DrawMesh(dt.zs.getMesh("Idle",dt.time), matrix4X4, dt.mat, 0);
+            //Graphics.DrawMesh(dt.zs.getMesh("Idle",dt.time), matrix4X4, dt.mat, 0);
+        }
+ 
+        foreach (var x in dic)
+        {
+            Graphics.DrawMeshInstanced(x.Key, 0, mat, x.Value.ToArray());
+        }
+    }
+    static Material _mat;
+    static Material mat
+    {
+        get
+        {
+            if (_mat == null)
+            {
+                _mat = new Material(Shader.Find("Standard"));
+                _mat.enableInstancing = true;
+            }
+            return _mat;
         }
     }
 }
