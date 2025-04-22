@@ -67,6 +67,33 @@ public class TAction
             return data.ml[framecount].low;
         }
     }
+
+    internal Mesh getMeshByKey(int key)
+    {
+        Mesh ret = null;
+        for(int i= 0; i < data.ml.Length; i++)
+        {
+            var m = data.ml[i];
+            if (m.low.GetHashCode() == key)
+            {
+                ret = m.low;
+            }
+            else if (m.hight.GetHashCode() == key)
+            {
+                ret = m.hight;
+            }
+            else if(m.middle.GetHashCode() == key)
+            {
+                ret = m.middle;
+            }
+
+            if (ret != null)
+            {
+                break;
+            }
+        }
+        return ret;
+    }
 }
 public class zhanshi : MonoBehaviour
 {
@@ -99,5 +126,18 @@ public class zhanshi : MonoBehaviour
         }
         return null;
     }
-     
+
+    internal Mesh getMeshByKey(int key)
+    {
+        Mesh ret = null;
+        for(int i = 0; i < actions.Length; i++)
+        {
+            ret = actions[i].getMeshByKey(key);
+            if (ret != null)
+            {
+                break;
+            }
+        }
+        return ret;
+    }
 }
