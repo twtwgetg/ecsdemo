@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 880290057}
   - component: {fileID: 880290056}
   - component: {fileID: 880290055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panSpeed: 0.5
-  zoomSpeed: 0.1
+  zoomSpeed: 10
   minZoom: 5
   maxZoom: 50
 --- !u!1 &2092198831

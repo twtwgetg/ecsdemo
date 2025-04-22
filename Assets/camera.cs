@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float panSpeed = 0.5f; // 平移速度
-    public float zoomSpeed = 0.1f; // 缩放速度
+    public float zoomSpeed = 10f; // 缩放速度
     public float minZoom = 5f; // 最小缩放距离
     public float maxZoom = 50f; // 最大缩放距离
 
@@ -70,7 +70,7 @@ public class CameraController : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (Mathf.Abs(scroll) > 0.01f) // 检测滚轮是否滚动
         {
-            float newSize = scroll * zoomSpeed * 1000f * Time.deltaTime;
+            float newSize = scroll * zoomSpeed * 100f * Time.deltaTime;
             cam.transform.position += cam.transform.forward * newSize;
         }
 
