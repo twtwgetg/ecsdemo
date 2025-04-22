@@ -50,11 +50,22 @@ public class TAction
     /**
      * 根据时间获取当前动作的模型
      */
-    internal Mesh getMeshByTime(float time)
+    internal Mesh getMeshByTime(float time, int lod)
     {
         int framecount =Mathf.FloorToInt(time * 60);
         framecount %= data.ml.Length;
-        return data.ml[framecount].hight;
+        if (lod == 0)
+        {
+            return data.ml[framecount].hight;
+        }
+        else if (lod == 1)
+        {
+            return data.ml[framecount].middle;
+        }
+        else
+        {
+            return data.ml[framecount].low;
+        }
     }
 }
 public class zhanshi : MonoBehaviour
@@ -79,12 +90,12 @@ public class zhanshi : MonoBehaviour
         }
         return null;
     }
-    internal Mesh getMesh(string ani, float time)
+    internal Mesh getMesh(string ani, float time,int lod)
     {
         var ac = getAni(ani);
         if (ac != null)
         {
-            return  ac.getMeshByTime(time);
+            return  ac.getMeshByTime(time,lod);
         }
         return null;
     }

@@ -25,7 +25,7 @@ public partial struct createsystem : ISystem
         }
         if (gb != null)
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 // 创建一个新的实体  
                 var entity = state.EntityManager.CreateEntity();
@@ -33,13 +33,11 @@ public partial struct createsystem : ISystem
                 // 创建并初始化 msxExp 组件  
                 var msxExpComponent = new msxExp
                 {
-                    pos = new Vector3(i % 10, 0, i / 10), // 设置位置，排列成 10x10 的网格  
+                    pos = new Vector3(i % 100*2, 0, i / 100 * 2), // 设置位置，排列成 10x10 的网格  
                     rot = Quaternion.identity, // 默认旋转  
                     sca = Vector3.one, // 默认缩放  
                     zs = gb.GetComponent<zhanshi>(),
-                    time = Random.Range(0, 2f),
-                    mesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx"), // 使用内置立方体网格  
-                    mat = new Material(Shader.Find("Standard")) // 使用标准材质  
+                    time = Random.Range(0, 2f),  
                 };
 
                 // 为实体添加 msxExp 组件  
@@ -61,20 +59,44 @@ public partial struct createsystem : ISystem
             dt.time += Time.deltaTime;
             // 创建变换矩阵  
             Matrix4x4 matrix4X4 = Matrix4x4.TRS(dt.pos, dt.rot, dt.sca);
-            var m = dt.zs.getMesh("Idle", dt.time);
+            var dis = Vector3.Distance(dt.pos, mcam.transform.position);
+            int lod = 0;
+            if (dis > 30)
+            {
+                lod= 2;
+            }
+            else if (lod > 5)
+            {
+                lod = 1;
+            }
+            else
+            {
+                lod = 0;
+            }
+            var m = dt.zs.getMesh("Attack", dt.time, lod);
             if (!dic.ContainsKey(m))
             {
                 dic[m] = new List<Matrix4x4>();
             }
-            dic[m].Add(matrix4X4);
-
-            // 绘制网格  
-            //Graphics.DrawMesh(dt.zs.getMesh("Idle",dt.time), matrix4X4, dt.mat, 0);
+            dic[m].Add(matrix4X4); 
         }
  
         foreach (var x in dic)
         {
-            Graphics.DrawMeshInstanced(x.Key, 0, mat, x.Value.ToArray());
+            Graphics.DrawMeshInstanced(x.Key, 0, mat,x.Value.ToArray(),x.Value.Count,null,
+                UnityEngine.Rendering.ShadowCastingMode.Off);
+        }
+    }
+    static Camera _cam;
+    static Camera mcam
+    {
+        get
+        {
+            if (_cam == null)
+            {
+                _cam = Camera.main;
+            }
+            return _cam;
         }
     }
     static Material _mat;
@@ -84,7 +106,7 @@ public partial struct createsystem : ISystem
         {
             if (_mat == null)
             {
-                _mat = new Material(Shader.Find("Standard"));
+                _mat = Resources.Load<Material>("MAT_Warrior_Red");// new Material(Shader.Find("Standard"));
                 _mat.enableInstancing = true;
             }
             return _mat;
