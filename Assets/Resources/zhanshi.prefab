@@ -167,7 +167,7 @@ MonoBehaviour:
       - hight: {fileID: 4300000, guid: 5f6998be4caa1304c816bfc0905140ac, type: 2}
         middle: {fileID: 4300000, guid: f418229f9a57e8e43ac6f894f6987d6d, type: 2}
         low: {fileID: 4300000, guid: 58036abc981c0d148bf57dc2e64a0c84, type: 2}
-    name: Attack
+    state: 1
     framecount: 40
   - data:
       ml:
@@ -351,7 +351,7 @@ MonoBehaviour:
       - hight: {fileID: 4300000, guid: 2d79aec0a3fcbf24c8d453af870f85ea, type: 2}
         middle: {fileID: 4300000, guid: e0b7b7da130bb4947941d4469e63b017, type: 2}
         low: {fileID: 4300000, guid: 0e4917a40000ed544b6b48a0adb6f4e4, type: 2}
-    name: die
+    state: 2
     framecount: 60
   - data:
       ml:
@@ -535,7 +535,7 @@ MonoBehaviour:
       - hight: {fileID: 4300000, guid: 2dbdd6285195f5840910e73986a0d921, type: 2}
         middle: {fileID: 4300000, guid: 6ed6548ed6b70eb4591f56dc6bf1e77c, type: 2}
         low: {fileID: 4300000, guid: 9471f506e694e1b49b0de9c365ee6675, type: 2}
-    name: Idle
+    state: 3
     framecount: 60
   - data:
       ml:
@@ -629,5 +629,5 @@ MonoBehaviour:
       - hight: {fileID: 4300000, guid: 76e6601798447de43a86de3d093852a7, type: 2}
         middle: {fileID: 4300000, guid: c05b0c616a6fbf048a5031d69c2ca233, type: 2}
         low: {fileID: 4300000, guid: 445dde5b289a3984f98e2223f9d426a8, type: 2}
-    name: Run
+    state: 4
     framecount: 30

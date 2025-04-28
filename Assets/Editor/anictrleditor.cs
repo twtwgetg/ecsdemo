@@ -15,5 +15,10 @@ public class anictrleditor : Editor
             var cx = target as anictrl;
             cx.attack();
         }
+        if (GUILayout.Button("run"))
+        { 
+            var cx = target as anictrl;
+            cx.run();
+        }
     }
 }

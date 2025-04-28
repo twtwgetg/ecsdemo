@@ -23,10 +23,4 @@ public class Mr : IComponentData
 {
     public GameObject zs;
 }
-public class msxExp:IComponentData
-{ 
-    public zhanshi zs; 
-    public Vector3 pos, sca;
-    public Quaternion rot;
-    public float time;
-}
+ 
